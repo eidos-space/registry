@@ -2,11 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "eidos-plugin-marketplace",
   "main": "./dist/_worker.js/index.js",
-  "compatibility_date": "2026-05-15",
+  "compatibility_date": "2026-09-21",
   "compatibility_flags": ["nodejs_compat"],
   "routes": [
     {
-      "pattern": "plugins.eidos.space",
+      "pattern": "community.eidos.space",
       "custom_domain": true
     }
   ],

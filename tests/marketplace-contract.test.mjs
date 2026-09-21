@@ -38,5 +38,5 @@ test("English and Chinese routes share one marketplace component", async () => {
   assert.match(chinese, /MarketplacePage locale="zh"/u);
   assert.match(englishDetail, /PluginDetailPage locale="en"/u);
   assert.match(chineseDetail, /PluginDetailPage locale="zh"/u);
-  assert.match(config, /plugins\.eidos\.space/u);
+  assert.match(config, /community\.eidos\.space/u);
 });
