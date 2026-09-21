@@ -1,11 +1,11 @@
 ---
 import type { Locale } from "../i18n";
-import { messages } from "../i18n";
+import { messages, pluginCategoryMessages } from "../i18n";
 import Layout from "../layouts/Layout.astro";
+import { loadMarketplaceRegistry } from "../lib/marketplace-registry";
 import {
-  loadPluginRegistry,
+  PLUGIN_CATEGORIES,
   PLUGIN_REGISTRY_REPO,
-  PLUGIN_REGISTRY_URL,
   pluginVisualVariant,
   type PluginRegistry,
 } from "../lib/plugin-registry";
@@ -24,13 +24,16 @@ Astro.response.headers.set(
 );
 
 try {
-  registry = await loadPluginRegistry();
+  registry = await loadMarketplaceRegistry();
 } catch (error) {
   console.error("Could not load the Eidos plugin registry", error);
 }
 
-const previewCount = registry?.plugins.filter((plugin) => plugin.preview).length ?? 0;
-const stableCount = (registry?.plugins.length ?? 0) - previewCount;
+const categoryLabels = pluginCategoryMessages[locale];
+const availableCategories = PLUGIN_CATEGORIES.flatMap((category) => {
+  const count = registry?.plugins.filter((plugin) => plugin.category === category).length ?? 0;
+  return count > 0 ? [{ id: category, label: categoryLabels[category], count }] : [];
+});
 ---
 
 <Layout locale={locale} title={t.metaTitle} description={t.metaDescription}>
@@ -73,49 +76,41 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
 
     <section class="catalog" aria-labelledby="catalog-title">
       <div class="shell catalog-layout">
-        <aside class="catalog-sidebar" aria-label={t.browse}>
-          <p class="sidebar-label">{t.browse}</p>
-          {
-            registry && (
-              <div class="market-filters">
-                <button type="button" data-plugin-filter="all" aria-pressed="true">
-                  <span>{t.all}</span><span>{registry.plugins.length}</span>
-                </button>
-                <button type="button" data-plugin-filter="preview" aria-pressed="false">
-                  <span>{t.preview}</span><span>{previewCount}</span>
-                </button>
-                <button type="button" data-plugin-filter="stable" aria-pressed="false">
-                  <span>{t.stable}</span><span>{stableCount}</span>
-                </button>
-              </div>
-            )
-          }
-          <div class="registry-links">
-            <p>{t.cacheNote}</p>
-            <a href={PLUGIN_REGISTRY_URL}>plugins.registry.json ↗</a>
-            <a href={`${PLUGIN_REGISTRY_REPO}/blob/main/CONTRIBUTING.md`}>{t.submit} ↗</a>
-          </div>
-        </aside>
-
-        <div class="catalog-main">
-          <div class="catalog-heading">
-            <p class="kicker">{t.eyebrow}</p>
+        <div class="catalog-heading">
+          <div>
+            <p class="sidebar-label">{t.browse}</p>
             <h2 id="catalog-title">{t.catalog}</h2>
           </div>
+        </div>
 
-          {
-            !registry ? (
-              <div class="catalog-unavailable">
-                <div>
-                  <h3>{t.unavailableTitle}</h3>
-                  <p>{t.unavailableBody}</p>
-                </div>
-                <a href={PLUGIN_REGISTRY_REPO}>{t.openRegistry} ↗</a>
+        {
+          registry && (
+            <div class="market-filters" role="group" aria-label={t.browse}>
+              <button type="button" data-plugin-filter="all" aria-pressed="true">
+                <span>{t.all}</span><span>{registry.plugins.length}</span>
+              </button>
+              {availableCategories.map((category) => (
+                <button type="button" data-plugin-filter={category.id} aria-pressed="false">
+                  <span>{category.label}</span><span>{category.count}</span>
+                </button>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          !registry ? (
+            <div class="catalog-unavailable">
+              <div>
+                <h3>{t.unavailableTitle}</h3>
+                <p>{t.unavailableBody}</p>
               </div>
-            ) : (
-              <>
-                <ol class="plugin-grid" data-plugin-grid>
-                  {registry.plugins.map((plugin) => {
+              <a href={PLUGIN_REGISTRY_REPO}>{t.openRegistry} ↗</a>
+            </div>
+          ) : (
+            <>
+              <ol class="plugin-grid" data-plugin-grid>
+                {registry.plugins.map((plugin) => {
                     const repoUrl = `https://github.com/${plugin.repo}`;
                     const releaseUrl = `${repoUrl}/releases/tag/${encodeURIComponent(plugin.tag)}`;
                     const detailUrl = `${locale === "zh" ? "/zh" : ""}/plugins/${encodeURIComponent(plugin.id)}`;
@@ -125,6 +120,7 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                       plugin.id,
                       plugin.description,
                       plugin.compatibility,
+                      categoryLabels[plugin.category],
                       publisher,
                     ]
                       .join(" ")
@@ -134,7 +130,7 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                       <li
                         class="plugin-card"
                         data-plugin-card
-                        data-plugin-status={plugin.preview ? "preview" : "stable"}
+                        data-plugin-category={plugin.category}
                         data-search={searchValue}
                       >
                         <div class="plugin-card-heading">
@@ -158,8 +154,8 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                           <div>
                             <div class="plugin-title-row">
                               <h3><a href={detailUrl}>{plugin.name}</a></h3>
-                              <span class:list={["status", plugin.preview ? "status-preview" : "status-stable"]}>
-                                {plugin.preview ? t.preview : t.stable}
+                              <span class={`plugin-category category-${plugin.category}`}>
+                                {categoryLabels[plugin.category]}
                               </span>
                             </div>
                             <p class="plugin-id">{publisher} · {plugin.id}</p>
@@ -176,16 +172,15 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                         </div>
                       </li>
                     );
-                  })}
-                </ol>
-                <div class="catalog-empty" data-plugin-empty hidden>
-                  <h3>{t.noResultsTitle}</h3>
-                  <p>{t.noResultsBody}</p>
-                </div>
-              </>
-            )
-          }
-        </div>
+                })}
+              </ol>
+              <div class="catalog-empty" data-plugin-empty hidden>
+                <h3>{t.noResultsTitle}</h3>
+                <p>{t.noResultsBody}</p>
+              </div>
+            </>
+          )
+        }
       </div>
     </section>
   </main>
@@ -212,7 +207,7 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
         cards.forEach((card) => {
           if (!(card instanceof HTMLElement)) return;
           const matchesQuery = !query || (card.dataset.search || "").includes(query);
-          const matchesFilter = activeFilter === "all" || card.dataset.pluginStatus === activeFilter;
+          const matchesFilter = activeFilter === "all" || card.dataset.pluginCategory === activeFilter;
           const matches = matchesQuery && matchesFilter;
           card.hidden = !matches;
           if (matches) visible += 1;

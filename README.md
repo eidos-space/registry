@@ -16,9 +16,11 @@ Cloudflare Workers serves the Astro application. Merges to `main` deploy through
 
 ## Eidos Lite plugins
 
-`plugins.registry.json` is the official Marketplace catalog for the current Eidos Lite plugin preview. Legacy extension and theme catalogs below remain separate.
+`plugins.registry.json` is the official Marketplace catalog for Eidos Lite and `eidos serve`. Legacy extension and theme catalogs below remain separate.
 
-To submit a plugin, publish a public GitHub Release containing `<id>-<version>.eidos-plugin`, then open a PR adding its entry. Include its exact version, tag, asset filename, SHA-256 of the uploaded bytes, a short description and a compatibility note. Set `preview: true` for preview builds. Optional icons contain SVG path data in a 24×24 viewBox, never markup or remote images. Optional screenshots reference PNG, JPEG, or WebP files in the plugin repository and include useful alt text; the marketplace resolves them from the repository's `main` branch.
+To submit a plugin, publish a public GitHub Release containing `<id>-<version>.eidos-plugin`, then open a PR adding its entry. Include its category, exact version, tag, asset filename, SHA-256 of the uploaded bytes, a short description and a compatibility note. Optional icons contain SVG path data in a 24×24 viewBox, never markup or remote images. Optional screenshots reference PNG, JPEG, or WebP files in the plugin repository and include useful alt text; the marketplace resolves them from the repository's `main` branch.
+
+Published plugins do not have preview or stable channels. Authors should document experimental behavior and known limitations in their README. The registry keeps `preview: false` only as a deprecated compatibility field for Eidos Lite 0.16.0; submissions must not use it to describe release status.
 
 Updates use a new release and a registry PR. Do not replace published assets: the host verifies the pinned checksum and package identity before requesting installation permission. Maintainers review ownership, compatibility and requested permissions before merging. Listing does not execute plugin code. Install once per device and enable separately in each Space.
 

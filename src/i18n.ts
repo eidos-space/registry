@@ -1,3 +1,5 @@
+import type { PluginCategory } from "./lib/plugin-registry";
+
 export type Locale = "en" | "zh";
 
 interface Messages {
@@ -15,10 +17,7 @@ interface Messages {
   pluginCount: (count: number) => string;
   browse: string;
   all: string;
-  preview: string;
-  stable: string;
   catalog: string;
-  cacheNote: string;
   source: string;
   release: string;
   noResultsTitle: string;
@@ -43,12 +42,9 @@ export const messages: Record<Locale, Messages> = {
     searchLabel: "Search plugins",
     searchPlaceholder: "Search plugins",
     pluginCount: (count) => `${count} ${count === 1 ? "plugin" : "plugins"}`,
-    browse: "Browse",
+    browse: "Categories",
     all: "All plugins",
-    preview: "Preview",
-    stable: "Stable",
     catalog: "Plugins",
-    cacheNote: "Synced from GitHub · cached for 10 minutes",
     source: "Source",
     release: "Release",
     noResultsTitle: "No plugins found",
@@ -71,12 +67,9 @@ export const messages: Record<Locale, Messages> = {
     searchLabel: "搜索插件",
     searchPlaceholder: "搜索插件",
     pluginCount: (count) => `${count} 个插件`,
-    browse: "浏览",
+    browse: "分类",
     all: "全部插件",
-    preview: "预览版",
-    stable: "稳定版",
     catalog: "插件",
-    cacheNote: "同步自 GitHub · 缓存 10 分钟",
     source: "源码",
     release: "发布版本",
     noResultsTitle: "没有找到插件",
@@ -88,6 +81,27 @@ export const messages: Record<Locale, Messages> = {
   },
 };
 
+export const pluginCategoryMessages = {
+  en: {
+    "data-visualization": "Data & visualization",
+    "knowledge-and-writing": "Knowledge & writing",
+    productivity: "Productivity",
+    automation: "Automation",
+    integrations: "Integrations",
+    "developer-tools": "Developer tools",
+    other: "Other",
+  },
+  zh: {
+    "data-visualization": "数据与可视化",
+    "knowledge-and-writing": "知识与写作",
+    productivity: "效率工具",
+    automation: "自动化",
+    integrations: "集成",
+    "developer-tools": "开发者工具",
+    other: "其他",
+  },
+} satisfies Record<Locale, Record<PluginCategory, string>>;
+
 export const detailMessages = {
   en: {
     back: "All plugins",
@@ -97,6 +111,7 @@ export const detailMessages = {
     about: "About this app",
     properties: "Properties",
     identifier: "Identifier",
+    category: "Category",
     version: "Version",
     apiVersion: "API version",
     type: "Type",
@@ -116,7 +131,6 @@ export const detailMessages = {
     resources: "Resources",
     source: "Source repository",
     release: "View release",
-    preview: "Preview",
     read: "Read access",
     write: "Write access",
     table: "Table view",
@@ -135,6 +149,7 @@ export const detailMessages = {
     about: "关于此应用",
     properties: "属性",
     identifier: "标识符",
+    category: "分类",
     version: "版本",
     apiVersion: "API 版本",
     type: "类型",
@@ -154,7 +169,6 @@ export const detailMessages = {
     resources: "资源",
     source: "源码仓库",
     release: "查看发布版本",
-    preview: "预览版",
     read: "只读访问",
     write: "读写访问",
     table: "表格视图",

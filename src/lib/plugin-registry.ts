@@ -3,6 +3,17 @@ export const PLUGIN_REGISTRY_URL =
 export const PLUGIN_REGISTRY_REPO = "https://github.com/eidos-space/registry";
 export const PLUGIN_REGISTRY_CACHE_SECONDS = 10 * 60;
 
+export const PLUGIN_CATEGORIES = [
+  "data-visualization",
+  "knowledge-and-writing",
+  "productivity",
+  "automation",
+  "integrations",
+  "developer-tools",
+  "other",
+] as const;
+export type PluginCategory = (typeof PLUGIN_CATEGORIES)[number];
+
 const PLUGIN_REGISTRY_CACHE_KEY =
   "https://plugins.eidos.space/.well-known/plugins-registry-v1.json";
 
@@ -10,12 +21,12 @@ export interface MarketplacePlugin {
   id: string;
   name: string;
   description: string;
+  category: PluginCategory;
   repo: string;
   version: string;
   tag: string;
   asset: string;
   sha256: string;
-  preview: boolean;
   compatibility: string;
   icon?: { paths: string[] };
   screenshots?: { path: string; alt: string }[];
@@ -33,6 +44,7 @@ export function pluginVisualVariant(id: string): 1 | 2 | 3 {
 
 const GITHUB_REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
+const PLUGIN_CATEGORY_SET = new Set<string>(PLUGIN_CATEGORIES);
 const SCREENSHOT_PATH = /^(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9][A-Za-z0-9._/-]*\.(?:png|jpe?g|webp)$/u;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -48,6 +60,8 @@ function parsePlugin(value: unknown): MarketplacePlugin | null {
     !isNonEmptyString(value.id) ||
     !isNonEmptyString(value.name) ||
     !isNonEmptyString(value.description) ||
+    !isNonEmptyString(value.category) ||
+    !PLUGIN_CATEGORY_SET.has(value.category) ||
     !isNonEmptyString(value.repo) ||
     !GITHUB_REPO.test(value.repo) ||
     !isNonEmptyString(value.version) ||
@@ -55,7 +69,7 @@ function parsePlugin(value: unknown): MarketplacePlugin | null {
     !isNonEmptyString(value.asset) ||
     !isNonEmptyString(value.sha256) ||
     !SHA256.test(value.sha256) ||
-    typeof value.preview !== "boolean" ||
+    value.preview !== false ||
     !isNonEmptyString(value.compatibility)
   ) {
     return null;
@@ -83,12 +97,12 @@ function parsePlugin(value: unknown): MarketplacePlugin | null {
     id: value.id,
     name: value.name,
     description: value.description,
+    category: value.category as PluginCategory,
     repo: value.repo,
     version: value.version,
     tag: value.tag,
     asset: value.asset,
     sha256: value.sha256,
-    preview: value.preview,
     compatibility: value.compatibility,
     ...(icon ? { icon } : {}),
     ...(screenshots.length ? { screenshots } : {}),

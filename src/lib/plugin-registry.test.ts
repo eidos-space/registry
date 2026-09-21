@@ -10,12 +10,13 @@ const validPlugin = {
   id: "eidos.chart",
   name: "Chart",
   description: "Visualize table records.",
+  category: "data-visualization",
   repo: "eidos-space/eidos-chart-plugin",
   version: "0.1.0",
   tag: "v0.1.0",
   asset: "eidos.chart-0.1.0.eidos-plugin",
   sha256: "a".repeat(64),
-  preview: true,
+  preview: false,
   compatibility: "Requires Eidos Lite 0.16.0 or later.",
   icon: { paths: ["M3 3v18h18"] },
   screenshots: [{ path: "assets/chart.webp", alt: "Chart table view" }],
@@ -24,6 +25,7 @@ const validPlugin = {
 test("parses the public plugin registry contract", () => {
   const registry = parsePluginRegistry({ schemaVersion: 1, plugins: [validPlugin] });
   assert.equal(registry.plugins[0]?.repo, validPlugin.repo);
+  assert.equal(registry.plugins[0]?.category, "data-visualization");
   assert.deepEqual(registry.plugins[0]?.icon?.paths, ["M3 3v18h18"]);
   assert.deepEqual(registry.plugins[0]?.screenshots, validPlugin.screenshots);
 });
@@ -34,6 +36,21 @@ test("drops malformed entries instead of exposing unsafe links", () => {
     plugins: [validPlugin, { ...validPlugin, id: "bad", repo: "https://example.com" }],
   });
   assert.deepEqual(registry.plugins.map((plugin) => plugin.id), ["eidos.chart"]);
+});
+
+test("drops entries outside the marketplace category taxonomy", () => {
+  const registry = parsePluginRegistry({
+    schemaVersion: 1,
+    plugins: [validPlugin, { ...validPlugin, id: "eidos.unknown", category: "games" }],
+  });
+  assert.deepEqual(registry.plugins.map((plugin) => plugin.id), ["eidos.chart"]);
+});
+
+test("rejects the retired preview release channel", () => {
+  assert.throws(
+    () => parsePluginRegistry({ schemaVersion: 1, plugins: [{ ...validPlugin, preview: true }] }),
+    /contains no valid entries/u,
+  );
 });
 
 test("rejects unsupported registry schemas", () => {

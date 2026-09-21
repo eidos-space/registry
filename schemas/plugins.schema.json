@@ -9,17 +9,18 @@
       "type": "array", "maxItems": 1000,
       "items": {
         "type": "object", "additionalProperties": false,
-        "required": ["id", "name", "description", "repo", "version", "tag", "asset", "sha256", "preview", "compatibility"],
+        "required": ["id", "name", "description", "category", "repo", "version", "tag", "asset", "sha256", "preview", "compatibility"],
         "properties": {
           "id": { "type": "string", "pattern": "^[a-z][a-z0-9.-]{1,127}$" },
           "name": { "$ref": "#/definitions/text" },
           "description": { "$ref": "#/definitions/text" },
+          "category": { "type": "string", "enum": ["data-visualization", "knowledge-and-writing", "productivity", "automation", "integrations", "developer-tools", "other"] },
           "repo": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$" },
           "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(-[a-zA-Z0-9.-]+)?$" },
           "tag": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$" },
           "asset": { "type": "string", "pattern": "^[a-z0-9.-]+\\.eidos-plugin$" },
           "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
-          "preview": { "type": "boolean" },
+          "preview": { "const": false, "deprecated": true, "description": "Compatibility field for Eidos Lite 0.16.0. Published plugins do not have release channels." },
           "compatibility": { "$ref": "#/definitions/text" },
           "icon": { "type": "object", "additionalProperties": false, "required": ["paths"], "properties": { "paths": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "string", "maxLength": 2048, "pattern": "^[Mm][\\s\\d.,+eE\\-MmLlHhVvCcSsQqTtAaZz]+$" } } } },
           "screenshots": { "type": "array", "maxItems": 8, "items": { "type": "object", "additionalProperties": false, "required": ["path", "alt"], "properties": { "path": { "type": "string", "maxLength": 256, "pattern": "^(?!.*(?:^|/)\\.\\.(?:/|$))[A-Za-z0-9][A-Za-z0-9._/-]*\\.(png|jpe?g|webp)$" }, "alt": { "$ref": "#/definitions/text" } } } }

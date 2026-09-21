@@ -1,9 +1,10 @@
 ---
 import type { Locale } from "../i18n";
-import { detailMessages } from "../i18n";
+import { detailMessages, pluginCategoryMessages } from "../i18n";
 import Layout from "../layouts/Layout.astro";
 import { loadPluginDetails, type PluginContribution } from "../lib/plugin-details";
-import { loadPluginRegistry, pluginVisualVariant } from "../lib/plugin-registry";
+import { loadMarketplaceRegistry } from "../lib/marketplace-registry";
+import { pluginVisualVariant } from "../lib/plugin-registry";
 
 interface Props {
   locale: Locale;
@@ -12,6 +13,7 @@ interface Props {
 
 const { locale, pluginId = "" } = Astro.props;
 const t = detailMessages[locale];
+const categoryLabels = pluginCategoryMessages[locale];
 const listPath = locale === "zh" ? "/zh/" : "/";
 
 Astro.response.headers.set(
@@ -21,7 +23,7 @@ Astro.response.headers.set(
 
 let plugin;
 try {
-  const registry = await loadPluginRegistry();
+  const registry = await loadMarketplaceRegistry();
   plugin = registry.plugins.find((entry) => entry.id === pluginId);
 } catch (error) {
   console.error("Could not load the Eidos plugin registry", error);
@@ -84,7 +86,7 @@ const contributionType = (item: PluginContribution) => {
               <div class="detail-heading">
                 <div class="detail-labels">
                   <span>{t.marketplace}</span>
-                  {plugin.preview && <span class="detail-preview-label">{t.preview}</span>}
+                  <span class="detail-category-label">{categoryLabels[plugin.category]}</span>
                 </div>
                 <h1>{plugin.name}</h1>
                 <p class="detail-byline">{publisher} · <code>{plugin.id}</code> · v{plugin.version}</p>
@@ -142,6 +144,7 @@ const contributionType = (item: PluginContribution) => {
                   <p>{t.appProfile}</p>
                   <h2 id="app-profile-title">{plugin.name}</h2>
                   <div class="app-profile-chips">
+                    <span>{categoryLabels[plugin.category]}</span>
                     {manifest?.views.slice(0, 3).map((view) => <span>{contributionType(view)}</span>)}
                     {!manifest?.networkOrigins.length && <span>{t.offline}</span>}
                   </div>
@@ -164,6 +167,7 @@ const contributionType = (item: PluginContribution) => {
               <h2>{t.properties}</h2>
               <dl>
                 <div><dt>{t.identifier}</dt><dd><code>{plugin.id}</code></dd></div>
+                <div><dt>{t.category}</dt><dd>{categoryLabels[plugin.category]}</dd></div>
                 <div><dt>{t.version}</dt><dd>{plugin.version}</dd></div>
                 <div><dt>{t.apiVersion}</dt><dd>{manifest?.apiVersion ?? "1.0"}</dd></div>
                 <div><dt>{t.type}</dt><dd>{t.marketplace}</dd></div>

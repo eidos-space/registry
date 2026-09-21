@@ -20,6 +20,8 @@ test("the marketplace remains a focused catalog", async () => {
   const publicSurface = `${component}\n${copy}`;
   assert.match(publicSurface, /data-plugin-search/u);
   assert.match(publicSurface, /data-plugin-filter/u);
+  assert.match(publicSurface, /data-plugin-category/u);
+  assert.doesNotMatch(publicSurface, /Preview|预览版|Stable|稳定版/u);
   assert.doesNotMatch(publicSurface, /下载 Eidos Lite|Download Eidos Lite|在 Eidos Lite 中安装/u);
   assert.doesNotMatch(publicSurface, /每个条目都来自开放的 GitHub 注册表/u);
 });
