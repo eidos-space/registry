@@ -18,6 +18,7 @@ export interface MarketplacePlugin {
   preview: boolean;
   compatibility: string;
   icon?: { paths: string[] };
+  screenshots?: { path: string; alt: string }[];
 }
 
 export interface PluginRegistry {
@@ -25,8 +26,14 @@ export interface PluginRegistry {
   plugins: MarketplacePlugin[];
 }
 
+export function pluginVisualVariant(id: string): 1 | 2 | 3 {
+  const total = Array.from(id).reduce((sum, character) => sum + character.charCodeAt(0), 0);
+  return ((total % 3) + 1) as 1 | 2 | 3;
+}
+
 const GITHUB_REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
+const SCREENSHOT_PATH = /^(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9][A-Za-z0-9._/-]*\.(?:png|jpe?g|webp)$/u;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
@@ -60,6 +67,18 @@ function parsePlugin(value: unknown): MarketplacePlugin | null {
     if (paths.length > 0) icon = { paths };
   }
 
+  const screenshots = Array.isArray(value.screenshots)
+    ? value.screenshots.flatMap((item) => {
+        if (
+          !isRecord(item) ||
+          !isNonEmptyString(item.path) ||
+          !SCREENSHOT_PATH.test(item.path) ||
+          !isNonEmptyString(item.alt)
+        ) return [];
+        return [{ path: item.path, alt: item.alt }];
+      }).slice(0, 8)
+    : [];
+
   return {
     id: value.id,
     name: value.name,
@@ -72,6 +91,7 @@ function parsePlugin(value: unknown): MarketplacePlugin | null {
     preview: value.preview,
     compatibility: value.compatibility,
     ...(icon ? { icon } : {}),
+    ...(screenshots.length ? { screenshots } : {}),
   };
 }
 

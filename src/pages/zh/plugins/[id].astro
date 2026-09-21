@@ -1,0 +1,14 @@
+---
+import PluginDetailPage from "../../../components/PluginDetailPage.astro";
+import { loadPluginRegistry } from "../../../lib/plugin-registry";
+
+const pluginId = Astro.params.id ?? "";
+try {
+  const registry = await loadPluginRegistry();
+  if (!registry.plugins.some((plugin) => plugin.id === pluginId)) Astro.response.status = 404;
+} catch {
+  Astro.response.status = 503;
+}
+---
+
+<PluginDetailPage locale="zh" pluginId={pluginId} />

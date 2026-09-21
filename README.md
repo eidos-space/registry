@@ -18,7 +18,7 @@ Cloudflare Workers serves the Astro application. Merges to `main` deploy through
 
 `plugins.registry.json` is the official Marketplace catalog for the current Eidos Lite plugin preview. Legacy extension and theme catalogs below remain separate.
 
-To submit a plugin, publish a public GitHub Release containing `<id>-<version>.eidos-plugin`, then open a PR adding its entry. Include its exact version, tag, asset filename, SHA-256 of the uploaded bytes, a short description and a compatibility note. Set `preview: true` for preview builds. Optional icons contain SVG path data in a 24×24 viewBox, never markup or remote images.
+To submit a plugin, publish a public GitHub Release containing `<id>-<version>.eidos-plugin`, then open a PR adding its entry. Include its exact version, tag, asset filename, SHA-256 of the uploaded bytes, a short description and a compatibility note. Set `preview: true` for preview builds. Optional icons contain SVG path data in a 24×24 viewBox, never markup or remote images. Optional screenshots reference PNG, JPEG, or WebP files in the plugin repository and include useful alt text; the marketplace resolves them from the repository's `main` branch.
 
 Updates use a new release and a registry PR. Do not replace published assets: the host verifies the pinned checksum and package identity before requesting installation permission. Maintainers review ownership, compatibility and requested permissions before merging. Listing does not execute plugin code. Install once per device and enable separately in each Space.
 

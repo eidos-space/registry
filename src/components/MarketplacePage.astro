@@ -6,6 +6,7 @@ import {
   loadPluginRegistry,
   PLUGIN_REGISTRY_REPO,
   PLUGIN_REGISTRY_URL,
+  pluginVisualVariant,
   type PluginRegistry,
 } from "../lib/plugin-registry";
 
@@ -114,9 +115,10 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
             ) : (
               <>
                 <ol class="plugin-grid" data-plugin-grid>
-                  {registry.plugins.map((plugin, index) => {
+                  {registry.plugins.map((plugin) => {
                     const repoUrl = `https://github.com/${plugin.repo}`;
                     const releaseUrl = `${repoUrl}/releases/tag/${encodeURIComponent(plugin.tag)}`;
+                    const detailUrl = `${locale === "zh" ? "/zh" : ""}/plugins/${encodeURIComponent(plugin.id)}`;
                     const publisher = plugin.repo.split("/")[0];
                     const searchValue = [
                       plugin.name,
@@ -136,7 +138,7 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                         data-search={searchValue}
                       >
                         <div class="plugin-card-heading">
-                          <span class={`plugin-icon plugin-icon-${(index % 3) + 1}`}>
+                          <span class={`plugin-icon plugin-icon-${pluginVisualVariant(plugin.id)}`}>
                             {plugin.icon ? (
                               <svg
                                 viewBox="0 0 24 24"
@@ -155,7 +157,7 @@ const stableCount = (registry?.plugins.length ?? 0) - previewCount;
                           </span>
                           <div>
                             <div class="plugin-title-row">
-                              <h3><a href={releaseUrl}>{plugin.name}</a></h3>
+                              <h3><a href={detailUrl}>{plugin.name}</a></h3>
                               <span class:list={["status", plugin.preview ? "status-preview" : "status-stable"]}>
                                 {plugin.preview ? t.preview : t.stable}
                               </span>

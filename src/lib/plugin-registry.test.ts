@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPluginRegistryLoader, parsePluginRegistry } from "./plugin-registry.ts";
+import {
+  createPluginRegistryLoader,
+  parsePluginRegistry,
+  pluginVisualVariant,
+} from "./plugin-registry.ts";
 
 const validPlugin = {
   id: "eidos.chart",
@@ -14,12 +18,14 @@ const validPlugin = {
   preview: true,
   compatibility: "Requires Eidos Lite 0.16.0 or later.",
   icon: { paths: ["M3 3v18h18"] },
+  screenshots: [{ path: "assets/chart.webp", alt: "Chart table view" }],
 };
 
 test("parses the public plugin registry contract", () => {
   const registry = parsePluginRegistry({ schemaVersion: 1, plugins: [validPlugin] });
   assert.equal(registry.plugins[0]?.repo, validPlugin.repo);
   assert.deepEqual(registry.plugins[0]?.icon?.paths, ["M3 3v18h18"]);
+  assert.deepEqual(registry.plugins[0]?.screenshots, validPlugin.screenshots);
 });
 
 test("drops malformed entries instead of exposing unsafe links", () => {
@@ -68,4 +74,9 @@ test("returns the last successful response if a refresh fails", async () => {
   now = 2_000;
   fail = true;
   assert.equal((await loader()).plugins[0]?.id, "eidos.chart");
+});
+
+test("uses a stable visual variant for the same plugin across list and detail views", () => {
+  assert.equal(pluginVisualVariant("eidos.map"), pluginVisualVariant("eidos.map"));
+  assert.ok([1, 2, 3].includes(pluginVisualVariant("eidos.chart")));
 });

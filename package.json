@@ -7,18 +7,21 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "pnpm build && wrangler dev --local",
-    "test": "node --experimental-strip-types --test src/lib/plugin-registry.test.ts tests/marketplace-contract.test.mjs",
+    "test": "node --experimental-strip-types --test src/lib/plugin-registry.test.ts src/lib/plugin-details.test.ts tests/marketplace-contract.test.mjs",
     "typecheck": "astro check",
     "deploy": "pnpm build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "12.6.0",
-    "@fontsource/ibm-plex-mono": "5.2.6",
-    "@fontsource/ibm-plex-sans": "5.2.6",
-    "astro": "5.11.0"
+    "@fontsource/outfit": "5.2.8",
+    "@fontsource/plus-jakarta-sans": "5.2.8",
+    "astro": "5.11.0",
+    "marked": "18.0.13",
+    "sanitize-html": "2.17.7"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.4",
+    "@types/sanitize-html": "2.16.1",
     "typescript": "5.8.3",
     "wrangler": "4.90.1"
   },

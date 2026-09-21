@@ -25,12 +25,16 @@ test("the marketplace remains a focused catalog", async () => {
 });
 
 test("English and Chinese routes share one marketplace component", async () => {
-  const [english, chinese, config] = await Promise.all([
+  const [english, chinese, englishDetail, chineseDetail, config] = await Promise.all([
     read("src/pages/index.astro"),
     read("src/pages/zh/index.astro"),
+    read("src/pages/plugins/[id].astro"),
+    read("src/pages/zh/plugins/[id].astro"),
     read("wrangler.jsonc"),
   ]);
   assert.match(english, /MarketplacePage locale="en"/u);
   assert.match(chinese, /MarketplacePage locale="zh"/u);
+  assert.match(englishDetail, /PluginDetailPage locale="en"/u);
+  assert.match(chineseDetail, /PluginDetailPage locale="zh"/u);
   assert.match(config, /plugins\.eidos\.space/u);
 });
