@@ -1,0 +1,244 @@
+---
+import type { Locale } from "../i18n";
+import { messages } from "../i18n";
+import Layout from "../layouts/Layout.astro";
+import {
+  loadPluginRegistry,
+  PLUGIN_REGISTRY_REPO,
+  PLUGIN_REGISTRY_URL,
+  type PluginRegistry,
+} from "../lib/plugin-registry";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = messages[locale];
+let registry: PluginRegistry | undefined;
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=60, s-maxage=300, stale-while-revalidate=3600",
+);
+
+try {
+  registry = await loadPluginRegistry();
+} catch (error) {
+  console.error("Could not load the Eidos plugin registry", error);
+}
+
+const previewCount = registry?.plugins.filter((plugin) => plugin.preview).length ?? 0;
+const stableCount = (registry?.plugins.length ?? 0) - previewCount;
+---
+
+<Layout locale={locale} title={t.metaTitle} description={t.metaDescription}>
+  <main data-marketplace data-locale={locale}>
+    <section class="market-hero" aria-labelledby="market-title">
+      <div class="shell">
+        <div class="market-kicker-row">
+          <p class="kicker">{t.eyebrow}</p>
+          <a class="registry-status" href={PLUGIN_REGISTRY_REPO}>
+            <span aria-hidden="true"></span>
+            {t.registry}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <h1 id="market-title">{t.title}</h1>
+
+        {
+          registry && (
+            <label class="market-search">
+              <span class="sr-only">{t.searchLabel}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-4-4" />
+              </svg>
+              <input
+                type="search"
+                placeholder={t.searchPlaceholder}
+                aria-label={t.searchLabel}
+                autocomplete="off"
+                data-plugin-search
+              />
+              <span class="market-count" aria-live="polite" data-plugin-count>
+                {t.pluginCount(registry.plugins.length)}
+              </span>
+            </label>
+          )
+        }
+      </div>
+    </section>
+
+    <section class="catalog" aria-labelledby="catalog-title">
+      <div class="shell catalog-layout">
+        <aside class="catalog-sidebar" aria-label={t.browse}>
+          <p class="sidebar-label">{t.browse}</p>
+          {
+            registry && (
+              <div class="market-filters">
+                <button type="button" data-plugin-filter="all" aria-pressed="true">
+                  <span>{t.all}</span><span>{registry.plugins.length}</span>
+                </button>
+                <button type="button" data-plugin-filter="preview" aria-pressed="false">
+                  <span>{t.preview}</span><span>{previewCount}</span>
+                </button>
+                <button type="button" data-plugin-filter="stable" aria-pressed="false">
+                  <span>{t.stable}</span><span>{stableCount}</span>
+                </button>
+              </div>
+            )
+          }
+          <div class="registry-links">
+            <p>{t.cacheNote}</p>
+            <a href={PLUGIN_REGISTRY_URL}>plugins.registry.json ↗</a>
+            <a href={`${PLUGIN_REGISTRY_REPO}/blob/main/CONTRIBUTING.md`}>{t.submit} ↗</a>
+          </div>
+        </aside>
+
+        <div class="catalog-main">
+          <div class="catalog-heading">
+            <p class="kicker">{t.eyebrow}</p>
+            <h2 id="catalog-title">{t.catalog}</h2>
+          </div>
+
+          {
+            !registry ? (
+              <div class="catalog-unavailable">
+                <div>
+                  <h3>{t.unavailableTitle}</h3>
+                  <p>{t.unavailableBody}</p>
+                </div>
+                <a href={PLUGIN_REGISTRY_REPO}>{t.openRegistry} ↗</a>
+              </div>
+            ) : (
+              <>
+                <ol class="plugin-grid" data-plugin-grid>
+                  {registry.plugins.map((plugin, index) => {
+                    const repoUrl = `https://github.com/${plugin.repo}`;
+                    const releaseUrl = `${repoUrl}/releases/tag/${encodeURIComponent(plugin.tag)}`;
+                    const publisher = plugin.repo.split("/")[0];
+                    const searchValue = [
+                      plugin.name,
+                      plugin.id,
+                      plugin.description,
+                      plugin.compatibility,
+                      publisher,
+                    ]
+                      .join(" ")
+                      .toLocaleLowerCase();
+
+                    return (
+                      <li
+                        class="plugin-card"
+                        data-plugin-card
+                        data-plugin-status={plugin.preview ? "preview" : "stable"}
+                        data-search={searchValue}
+                      >
+                        <div class="plugin-card-heading">
+                          <span class={`plugin-icon plugin-icon-${(index % 3) + 1}`}>
+                            {plugin.icon ? (
+                              <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                {plugin.icon.paths.map((path) => <path d={path} />)}
+                              </svg>
+                            ) : (
+                              <span>{plugin.name.slice(0, 1)}</span>
+                            )}
+                          </span>
+                          <div>
+                            <div class="plugin-title-row">
+                              <h3><a href={releaseUrl}>{plugin.name}</a></h3>
+                              <span class:list={["status", plugin.preview ? "status-preview" : "status-stable"]}>
+                                {plugin.preview ? t.preview : t.stable}
+                              </span>
+                            </div>
+                            <p class="plugin-id">{publisher} · {plugin.id}</p>
+                          </div>
+                        </div>
+                        <p class="plugin-description">{plugin.description}</p>
+                        <div class="plugin-meta">
+                          <span>v{plugin.version}</span>
+                          <span>{plugin.compatibility}</span>
+                        </div>
+                        <div class="plugin-actions">
+                          <a href={repoUrl}>{t.source}</a>
+                          <a class="release-link" href={releaseUrl}>{t.release}<span aria-hidden="true">↗</span></a>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <div class="catalog-empty" data-plugin-empty hidden>
+                  <h3>{t.noResultsTitle}</h3>
+                  <p>{t.noResultsBody}</p>
+                </div>
+              </>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  function setupMarketplace() {
+    document.querySelectorAll("[data-marketplace]").forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.ready === "true") return;
+
+      const input = root.querySelector("[data-plugin-search]");
+      const count = root.querySelector("[data-plugin-count]");
+      const empty = root.querySelector("[data-plugin-empty]");
+      const cards = Array.from(root.querySelectorAll("[data-plugin-card]"));
+      const filters = Array.from(root.querySelectorAll("[data-plugin-filter]"));
+      if (!(input instanceof HTMLInputElement) || !(count instanceof HTMLElement)) return;
+
+      let activeFilter = "all";
+
+      const update = () => {
+        const query = input.value.trim().toLocaleLowerCase();
+        let visible = 0;
+
+        cards.forEach((card) => {
+          if (!(card instanceof HTMLElement)) return;
+          const matchesQuery = !query || (card.dataset.search || "").includes(query);
+          const matchesFilter = activeFilter === "all" || card.dataset.pluginStatus === activeFilter;
+          const matches = matchesQuery && matchesFilter;
+          card.hidden = !matches;
+          if (matches) visible += 1;
+        });
+
+        count.textContent =
+          root.dataset.locale === "zh"
+            ? `${visible} 个插件`
+            : `${visible} ${visible === 1 ? "plugin" : "plugins"}`;
+        if (empty instanceof HTMLElement) empty.hidden = visible !== 0;
+      };
+
+      input.addEventListener("input", update);
+      filters.forEach((filter) => {
+        if (!(filter instanceof HTMLButtonElement)) return;
+        filter.addEventListener("click", () => {
+          activeFilter = filter.dataset.pluginFilter || "all";
+          filters.forEach((candidate) => {
+            candidate.setAttribute("aria-pressed", String(candidate === filter));
+          });
+          update();
+        });
+      });
+
+      root.dataset.ready = "true";
+    });
+  }
+
+  setupMarketplace();
+  document.addEventListener("astro:page-load", setupMarketplace);
+</script>

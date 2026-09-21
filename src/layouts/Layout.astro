@@ -1,0 +1,63 @@
+---
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-serif/500.css";
+import type { Locale } from "../i18n";
+import { messages } from "../i18n";
+import "../styles/global.css";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const t = messages[locale];
+const languagePath = locale === "zh" ? "/" : "/zh/";
+const docsPath =
+  locale === "zh"
+    ? "https://docs.eidos.space/zh-cn/plugins/guide/"
+    : "https://docs.eidos.space/plugins/guide/";
+---
+
+<!doctype html>
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8f7f3" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="https://eidos.space" aria-label="Eidos">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m12 2 8.5 4.8v9.8L12 21.4l-8.5-4.8V6.8L12 2Z" />
+            <path d="m7.3 8.6 4.7-2.7 4.7 2.7-4.7 2.7-4.7-2.7Zm0 3.3 4.7 2.7 4.7-2.7M12 11.3v6" />
+          </svg>
+          <span>{t.brand}</span>
+        </a>
+        <nav aria-label="Primary">
+          <a href={docsPath}>{t.docs}</a>
+          <a href="https://github.com/eidos-space/registry/blob/main/CONTRIBUTING.md">{t.submit}</a>
+          <a href={languagePath} lang={locale === "zh" ? "en" : "zh-CN"}>{t.language}</a>
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <p>© {new Date().getFullYear()} Eidos</p>
+        <p>{t.footer}</p>
+        <a href="https://github.com/eidos-space/registry">GitHub ↗</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,25 +1,28 @@
-name: Validate
+name: Deploy marketplace
 
 on:
-  pull_request:
+  push:
+    branches: [main]
     paths:
-      - '*.registry.json'
-      - 'schemas/**'
+      - 'plugins.registry.json'
       - 'src/**'
       - 'public/**'
-      - 'tests/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
       - 'astro.config.mjs'
-      - 'tsconfig.json'
       - 'wrangler.jsonc'
-      - '.github/workflows/**'
-  push:
-    branches: [main]
+      - '.github/workflows/deploy-marketplace.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: plugin-marketplace-production
+  cancel-in-progress: false
 
 jobs:
-  validate:
+  deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -33,7 +36,7 @@ jobs:
       - run: pnpm test
       - run: pnpm typecheck
       - run: pnpm build
-      - run: npm install -g ajv-cli
-      - run: ajv validate -s schemas/themes.schema.json -d themes.registry.json
-      - run: ajv validate -s schemas/extensions.schema.json -d extensions.registry.json
-      - run: ajv validate -s schemas/plugins.schema.json -d plugins.registry.json
+      - run: pnpm exec wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
