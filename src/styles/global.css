@@ -114,29 +114,33 @@ input:focus-visible {
 
 .market-hero::after {
   position: absolute;
-  right: -72px;
-  bottom: -128px;
-  width: 360px;
-  height: 360px;
+  right: 50%;
+  bottom: -300px;
+  width: 560px;
+  height: 560px;
   border: 1px solid rgb(81 66 199 / 18%);
   border-radius: 50%;
   box-shadow: 0 0 0 42px rgb(81 66 199 / 5%), 0 0 0 84px rgb(81 66 199 / 4%);
   content: "";
   pointer-events: none;
+  transform: translateX(50%);
 }
 
 .market-hero .shell {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-block: clamp(68px, 9vw, 108px) clamp(62px, 8vw, 92px);
 }
 
 .market-kicker-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 19px;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 23px;
 }
 
 .kicker,
@@ -172,12 +176,13 @@ input:focus-visible {
 }
 
 .market-hero h1 {
-  max-width: 880px;
+  max-width: 980px;
   margin: 0;
   font-size: clamp(3rem, 7vw, 5.7rem);
   font-weight: 600;
   letter-spacing: -0.065em;
   line-height: 0.96;
+  text-align: center;
   white-space: pre-line;
 }
 
@@ -188,7 +193,7 @@ input:focus-visible {
   min-height: 64px;
   align-items: center;
   gap: 14px;
-  margin-top: clamp(38px, 5vw, 54px);
+  margin: clamp(38px, 5vw, 54px) auto 0;
   padding: 0 18px;
   border: 1px solid rgb(58 48 121 / 22%);
   border-radius: 14px;
@@ -517,13 +522,21 @@ input:focus-visible {
   .site-header nav { gap: 2px; }
   .site-header nav a:first-child { display: none; }
   .market-hero .shell { padding-block: 58px 56px; }
-  .market-hero::after { right: -190px; }
-  .market-kicker-row { align-items: flex-start; }
+  .market-hero::after {
+    right: 50%;
+    bottom: -350px;
+    transform: translateX(50%);
+  }
+
+  .market-kicker-row {
+    align-items: center;
+    flex-direction: column;
+    gap: 11px;
+  }
 
   .registry-status {
-    max-width: 162px;
-    justify-content: flex-end;
-    text-align: right;
+    justify-content: center;
+    text-align: center;
   }
 
   .market-hero h1 { font-size: clamp(2.7rem, 13vw, 3.8rem); }
