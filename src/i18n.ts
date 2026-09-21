@@ -66,7 +66,7 @@ export const messages: Record<Locale, Messages> = {
     submit: "提交插件",
     language: "English",
     eyebrow: "社区插件市场",
-    title: "为自己的文件，选择本地应用。",
+    title: "为自己的文件，\n选择本地应用。",
     registry: "开放的 GitHub 注册表",
     searchLabel: "搜索插件",
     searchPlaceholder: "搜索插件",

@@ -15,7 +15,6 @@
     "@astrojs/cloudflare": "12.6.0",
     "@fontsource/ibm-plex-mono": "5.2.6",
     "@fontsource/ibm-plex-sans": "5.2.6",
-    "@fontsource/ibm-plex-serif": "5.2.6",
     "astro": "5.11.0"
   },
   "devDependencies": {
