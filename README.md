@@ -1,19 +1,12 @@
 # Eidos Registry
 
-This repository is the source of truth for the Eidos community plugin catalog and hosts the standalone marketplace at `community.eidos.space`. The catalog is public, reviewable, and backed by GitHub releases. The marketplace reads `plugins.registry.json` directly and caches successful responses for 10 minutes; it has no account or database dependency.
+This repository is the source of truth for the Eidos community plugin catalog.
+It contains registry data, JSON schemas, and submission validation.
 
-## Marketplace development
-
-```bash
-pnpm install
-pnpm dev
-pnpm test
-pnpm typecheck
-pnpm build
-pnpm deploy
-```
-
-Cloudflare Workers serves the Astro application. Maintainers deploy it locally with `pnpm deploy`; GitHub Actions only validates registry changes. The Worker owns the `community.eidos.space` custom domain.
+The community website is maintained and deployed independently from
+[eidos-space/community](https://github.com/eidos-space/community).
+It reads the public registry at runtime and caches successful responses for
+10 minutes. Catalog updates do not require a website build or deployment.
 
 ## Eidos Lite plugins
 

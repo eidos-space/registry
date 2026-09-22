@@ -1,39 +1,26 @@
-name: Validate
+name: Validate registry
 
 on:
   pull_request:
     paths:
       - '*.registry.json'
       - 'schemas/**'
-      - 'src/**'
-      - 'public/**'
-      - 'tests/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'astro.config.mjs'
-      - 'tsconfig.json'
-      - 'wrangler.jsonc'
       - '.github/workflows/**'
   push:
     branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10.12.4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-      - run: pnpm typecheck
-      - run: pnpm build
-      - run: npm install -g ajv-cli
+      - run: npm install -g ajv-cli@5.0.0
       - run: ajv validate -s schemas/themes.schema.json -d themes.registry.json
       - run: ajv validate -s schemas/extensions.schema.json -d extensions.registry.json
       - run: ajv validate -s schemas/plugins.schema.json -d plugins.registry.json
