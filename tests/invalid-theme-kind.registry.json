@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "id": "example.slate-theme",
+      "name": "Slate",
+      "description": "A quiet light and dark theme.",
+      "category": "themes",
+      "repo": "example/slate-theme",
+      "version": "1.0.0",
+      "tag": "v1.0.0",
+      "asset": "example.slate-theme-1.0.0.eidos-plugin",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite with Plugin API 1.6.0 or later."
+    }
+  ]
+}

@@ -21,6 +21,15 @@ jobs:
         with:
           node-version: '22'
       - run: npm install -g ajv-cli@5.0.0
-      - run: ajv validate -s schemas/themes.schema.json -d themes.registry.json
       - run: ajv validate -s schemas/extensions.schema.json -d extensions.registry.json
       - run: ajv validate -s schemas/plugins.schema.json -d plugins.registry.json
+      - run: ajv validate -s schemas/plugins.schema.json -d tests/theme-plugin.registry.json
+      - run: |
+          if ajv validate -s schemas/plugins.schema.json -d tests/invalid-theme-kind.registry.json; then
+            echo 'A theme category without kind: theme must be rejected'
+            exit 1
+          fi
+          if ajv validate -s schemas/plugins.schema.json -d tests/invalid-theme-category.registry.json; then
+            echo 'A theme kind outside the themes category must be rejected'
+            exit 1
+          fi

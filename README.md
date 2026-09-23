@@ -10,47 +10,40 @@ It reads the public registry at runtime and caches successful responses for
 
 ## Eidos Lite plugins
 
-`plugins.registry.json` is the official Marketplace catalog for Eidos Lite and `eidos serve`. Legacy extension and theme catalogs below remain separate.
+`plugins.registry.json` is the official Marketplace catalog for Eidos Lite and `eidos serve`. It lists executable plugins and standalone Eidos Lite theme plugins. The old Desktop theme catalog is retired; themes use the same versioned `.eidos-plugin` package and checksum flow as other plugins.
 
 To submit a plugin, publish a public GitHub Release containing `<id>-<version>.eidos-plugin`, then open a PR adding its entry. Include its category, exact version, tag, asset filename, SHA-256 of the uploaded bytes, a short description and a compatibility note. Optional icons contain SVG path data in a 24×24 viewBox, never markup or remote images. Optional screenshots reference PNG, JPEG, or WebP files in the plugin repository and include useful alt text; the marketplace resolves them from the repository's `main` branch.
 
-Published plugins do not have preview or stable channels. Authors should document experimental behavior and known limitations in their README. The registry keeps `preview: false` only as a deprecated compatibility field for Eidos Lite 0.16.0; submissions must not use it to describe release status.
+Published plugins do not have preview or stable channels. Authors should document experimental behavior and known limitations in their README. Keep `preview: false` in each registry entry while older Lite releases still require this internal compatibility field; it does not create a public release channel.
 
 Updates use a new release and a registry PR. Do not replace published assets: the host verifies the pinned checksum and package identity before requesting installation permission. Maintainers review ownership, compatibility and requested permissions before merging. Listing does not execute plugin code. Install once per device and enable separately in each Space.
 
 The host fetches this catalog over HTTPS and downloads the pinned GitHub Release asset. It retains the last successful catalog for offline browsing; installing requires a fresh online catalog. There is no automatic update or npm dependency installation.
 
-This is the official registry for Eidos extensions and themes.
-
 ## Themes
 
-Submit your theme by adding to `themes.registry.json`:
+Create a standalone theme with `kind: "theme"`, `requires.pluginApi: "1.6.0"`, and a validated `theme.stylesheet` in `plugin.json`. The stylesheet supplies light and dark semantic tokens and may bundle local fonts. Theme packages contain no executable views, actions, or grants. See the [theme development workflow](https://docs.eidos.space/plugins/workflow/#build-a-standalone-eidos-lite-theme) and the `theme` starter in `@eidos.space/plugin-tools`.
+
+Publish `<id>-<version>.eidos-plugin` as a GitHub Release asset, then add an entry to `plugins.registry.json` using `kind: "theme"` and `category: "themes"`:
 
 ```json
 {
-  "name": "My Theme",
-  "author": "github-username",
-  "repo": "owner/repo-name",
-  "screenshot": "screenshot.png",
-  "modes": ["dark", "light"]
+  "kind": "theme",
+  "id": "example.slate-theme",
+  "name": "Slate",
+  "description": "A quiet light and dark theme with bundled fonts.",
+  "category": "themes",
+  "repo": "owner/slate-theme",
+  "version": "1.0.0",
+  "tag": "v1.0.0",
+  "asset": "example.slate-theme-1.0.0.eidos-plugin",
+  "sha256": "<64 lowercase hex characters>",
+  "preview": false,
+  "compatibility": "Requires Eidos Lite with Plugin API 1.6.0 or later. Not supported by eidos serve."
 }
 ```
 
-### Theme Fields
-
-| Field        | Required | Description                                    |
-| ------------ | -------- | ---------------------------------------------- |
-| `name`       | Yes      | Display name                                   |
-| `author`     | Yes      | Your name                                      |
-| `repo`       | Yes      | GitHub `owner/repo`                            |
-| `screenshot` | Yes      | Image filename in repo                         |
-| `modes`      | Yes      | `["light"]`, `["dark"]` or `["light", "dark"]` |
-
-### Theme Requirements
-
-- Public GitHub repo
-- `theme.css` in repo root
-- Screenshot image in repo
+Icons and screenshots use the same optional fields as other plugin entries. The theme package itself defines both light and dark styles; registry entries do not use the old `modes`, `author`, or root-level `theme.css` fields. Installation does not activate a theme. Users select an installed theme explicitly in Eidos Lite, and that selection applies across Spaces.
 
 ## Extensions
 
@@ -79,6 +72,4 @@ Submit your extension by adding to `extensions.registry.json`:
 - Public GitHub repo
 - Follow the Eidos extension structure
 
-## Example Repos
-
-- Theme: `mayneyao/eidos-theme-flexoki`
+`extensions.registry.json` remains a separate catalog for earlier extensions; it is not used for theme plugins.
