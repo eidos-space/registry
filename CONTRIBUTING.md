@@ -24,12 +24,6 @@ Published plugins have no preview or stable channel. Describe experimental behav
 
 Old Desktop `themes.registry.json` entries and the repository-root `theme.css` format are not accepted.
 
-## Submit an Extension
-
-1. Create an extension repository
-2. Add to `extensions.registry.json`
-3. Submit PR
-
 ## Guidelines
 
 - Use kebab-case IDs

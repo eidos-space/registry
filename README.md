@@ -45,31 +45,3 @@ Publish `<id>-<version>.eidos-plugin` as a GitHub Release asset, then add an ent
 
 Icons and screenshots use the same optional fields as other plugin entries. The theme package itself defines both light and dark styles; registry entries do not use the old `modes`, `author`, or root-level `theme.css` fields. Installation does not activate a theme. Users select an installed theme explicitly in Eidos Lite, and that selection applies across Spaces.
 
-## Extensions
-
-Submit your extension by adding to `extensions.registry.json`:
-
-```json
-{
-  "name": "My Extension",
-  "author": "github-username",
-  "repo": "owner/repo-name",
-  "description": "Short description of what the extension does"
-}
-```
-
-### Extension Fields
-
-| Field         | Required | Description                         |
-| ------------- | -------- | ----------------------------------- |
-| `name`        | Yes      | Display name                        |
-| `author`      | Yes      | Your name                           |
-| `repo`        | Yes      | GitHub `owner/repo`                 |
-| `description` | Yes      | Brief description of the extension  |
-
-### Extension Requirements
-
-- Public GitHub repo
-- Follow the Eidos extension structure
-
-`extensions.registry.json` remains a separate catalog for earlier extensions; it is not used for theme plugins.
