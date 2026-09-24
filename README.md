@@ -45,3 +45,26 @@ Publish `<id>-<version>.eidos-plugin` as a GitHub Release asset, then add an ent
 
 Icons and screenshots use the same optional fields as other plugin entries. The theme package itself defines both light and dark styles; registry entries do not use the old `modes`, `author`, or root-level `theme.css` fields. Installation does not activate a theme. Users select an installed theme explicitly in Eidos Lite, and that selection applies across Spaces.
 
+## Screenshots
+
+Plugins and themes can declare showcase images displayed in the Community marketplace and Eidos Lite catalog:
+
+```json
+"screenshots": [
+  {
+    "path": "screenshots/overview.png",
+    "alt": "Interactive view overview"
+  }
+]
+```
+
+### Guidelines for Screenshots
+
+- **Path**: Relative path in the plugin's GitHub repository on the `main` branch (e.g., `screenshots/overview.png`).
+- **Formats**: PNG, JPEG, or WebP. Keep files optimized (recommended < 800 KB per image).
+- **Aspect ratio**: 16:10 (e.g. 1280×800) or 16:9 (e.g. 1280×720 / 1920×1080) for consistent presentation.
+- **Quantity**: 1 to 8 images.
+- **For plugins**: Showcase real-world interactive views, editors, or automated results.
+- **For themes**: Include both Light and Dark mode appearances (e.g., `screenshots/light.png` and `screenshots/dark.png`) to show palette and typography contrast.
+
+

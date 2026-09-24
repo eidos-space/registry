@@ -3,7 +3,7 @@
 ## Submit a Plugin
 
 1. Publish a public GitHub Release containing `<id>-<version>.eidos-plugin`.
-2. Add the release to `plugins.registry.json` with its exact version, tag, asset filename, SHA-256, compatibility note, and one category:
+2. Add the release to `plugins.registry.json` with its exact version, tag, asset filename, SHA-256, compatibility note, optional `screenshots` array (recommended 16:10 PNG/WebP under `screenshots/`), and one category:
    - `data-visualization`
    - `knowledge-and-writing`
    - `productivity`
@@ -20,7 +20,7 @@ Published plugins have no preview or stable channel. Describe experimental behav
 
 1. Create a theme plugin with `kind: "theme"`, Plugin API `1.6.0`, and a light/dark `theme.stylesheet` in `plugin.json`. The package contains no executable code or permissions.
 2. Pack it as `<id>-<version>.eidos-plugin` and publish that exact file in a public GitHub Release.
-3. Add it to `plugins.registry.json` with `kind: "theme"`, `category: "themes"`, release asset, SHA-256, and a Lite compatibility note, then submit a PR.
+3. Add it to `plugins.registry.json` with `kind: "theme"`, `category: "themes"`, release asset, SHA-256, a Lite compatibility note, and light/dark `screenshots`, then submit a PR.
 
 Old Desktop `themes.registry.json` entries and the repository-root `theme.css` format are not accepted.
 
