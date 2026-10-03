@@ -63,12 +63,12 @@
       "description": "Open or create today's Markdown journal with a yearly writing heatmap, streaks, and recent entries overview.",
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-journals-plugin",
-      "version": "0.5.0",
-      "tag": "v0.5.0",
-      "asset": "eidos.journals-0.5.0.eidos-plugin",
-      "sha256": "7e8ebb934e1f92ccf58baa458e4fd96ec6a4c736c5955f6fda4731caa5e73370",
+      "version": "0.5.1",
+      "tag": "v0.5.1",
+      "asset": "eidos.journals-0.5.1.eidos-plugin",
+      "sha256": "05db4ebe1442b41973e6eb346b2a2242ca537b154cee50711b1c1974f093ac4b",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Not supported by CLI Serve.",
+      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Android requires a build with plugin Page navigation support. Not supported by CLI Serve.",
       "icon": {
         "paths": [
           "M8 2v4",
