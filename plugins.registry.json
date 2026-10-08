@@ -54,7 +54,7 @@
       "asset": "eidos.chart-0.3.2.eidos-plugin",
       "sha256": "82b7636544ada16f8b81fc4fd53d01c38bc158ed57a8237c574a9239e1c478d7",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.20.0 or Eidos CLI 3.0.0 or later with Plugin API 3.0.0. Native PNG export and embedded Dashboard presentation require Lite 0.22.0.",
+      "compatibility": "Requires Eidos Lite 0.20.0 or Eidos CLI 3.0.0 or later with Plugin API 3.0.0. Native PNG export and embedded Dashboard presentation require Lite 0.22.1.",
       "icon": { "paths": ["M3 3v18h18", "M7 16v-5", "M12 16V7", "M17 16v-8"] }
     },
     {
@@ -68,7 +68,7 @@
       "asset": "eidos.dashboard-0.1.0.eidos-plugin",
       "sha256": "b01bd0451bd8a4094cd92a1713e839f3c0c380bf1ce3f435fc6cf602ac55ae0a",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.22.0 with Plugin API 3.2.0. Reads workspace files and edits .dashboard configuration files. Not supported by CLI Serve, Android or iOS.",
+      "compatibility": "Requires Eidos Lite 0.22.1 with Plugin API 3.2.0. Reads workspace files and edits .dashboard configuration files. Not supported by CLI Serve, Android or iOS.",
       "icon": { "paths": ["M3 3h7v7H3z", "M14 3h7v11h-7z", "M3 14h7v7H3z", "M14 18h7v3h-7z"] }
     },
     {
