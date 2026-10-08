@@ -2,6 +2,24 @@
   "schemaVersion": 1,
   "plugins": [
     {
+      "id": "local.eidos-gpx-viewer",
+      "name": "GPX Viewer",
+      "description": "Explore GPX tracks, routes and waypoints on an interactive map with timeline playback, elevation and speed charts.",
+      "category": "data-visualization",
+      "repo": "eidos-space/eidos-gpx-viewer",
+      "version": "0.1.3",
+      "tag": "v0.1.3",
+      "asset": "local.eidos-gpx-viewer-0.1.3.eidos-plugin",
+      "sha256": "29f7a2a6da20b6679cba31b876482923f4fb524fd241b9db26f0230cc98bf3a8",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite with Plugin API 3.0.0 or later, WebGL and browser workers. Read-only GPX file View; online basemap uses OpenFreeMap. Not supported by CLI Serve. Android and iOS are unverified.",
+      "icon": { "paths": ["M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z", "M9 3v15", "M15 6v15"] },
+      "screenshots": [
+        { "path": "screenshots/overview.png", "alt": "GPX map and timeline showing a generated example route." },
+        { "path": "screenshots/details.png", "alt": "Synthetic GPX route details with elevation and speed charts." }
+      ]
+    },
+    {
       "id": "eidos.smart-actions",
       "name": "Smart Actions",
       "description": "Use Jev to classify requests, assess urgency and score feedback, then write results to your table.",
