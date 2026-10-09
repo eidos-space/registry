@@ -2,6 +2,19 @@
   "schemaVersion": 1,
   "plugins": [
     {
+      "id": "eidos.markdown-title-sync",
+      "name": "Markdown Title Sync",
+      "description": "Keep Markdown filenames and existing leading H1 headings in sync when saving or renaming files.",
+      "category": "knowledge-and-writing",
+      "repo": "eidos-space/eidos-markdown-title-sync",
+      "version": "0.1.0",
+      "tag": "v0.1.0",
+      "asset": "eidos.markdown-title-sync-0.1.0.eidos-plugin",
+      "sha256": "26a66057608bc3378eca4cc4166f93e4d710262447ef6eb4ee0ea8e6f22e06e1",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite 0.23.0 or later with Plugin API 3.3.0. Optional per-Space file hooks for local Markdown saves and renames. Not supported by CLI Serve. Android and iOS device flows are unverified."
+    },
+    {
       "id": "eidos.gpx-viewer",
       "name": "GPX Viewer",
       "description": "Explore GPX tracks, routes and waypoints on an interactive map with timeline playback, elevation and speed charts.",
