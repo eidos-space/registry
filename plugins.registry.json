@@ -2,6 +2,19 @@
   "schemaVersion": 1,
   "plugins": [
     {
+      "id": "eidos.recent-history",
+      "name": "Recent History",
+      "description": "Automatically record file-open history.",
+      "category": "productivity",
+      "repo": "eidos-space/eidos-recent-history-plugin",
+      "version": "1.0.1",
+      "tag": "v1.0.1",
+      "asset": "eidos.recent-history-1.0.1.eidos-plugin",
+      "sha256": "f46e33d84538b1d7683d4749dbade37f42fe2fad72cd69638eeccc677d352313",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite 0.28.0 or later with Plugin API 3.6.0. Authorize automatic background startup and file-open history in each Space. Not supported by CLI Serve, Android or iOS."
+    },
+    {
       "id": "eidos.markdown-title-sync",
       "name": "Markdown Title Sync",
       "description": "Keep Markdown filenames and existing leading H1 headings in sync when saving or renaming files.",
