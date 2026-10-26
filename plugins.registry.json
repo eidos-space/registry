@@ -10,7 +10,7 @@
       "version": "1.1.0",
       "tag": "v1.1.0",
       "asset": "eidos.recent-history-1.1.0.eidos-plugin",
-      "sha256": "2492545a6a681e30e9a174746475a82ab08c50ec5e167558daea70f22a6687cb",
+      "sha256": "bcc46f0966be51416a85cec86f84578a4498588c6396027adb04d1c8d2969a76",
       "preview": false,
       "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported. Authorize automatic background startup and file-open metadata in each Space.",
       "localization": {
