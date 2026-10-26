@@ -24,6 +24,12 @@ jobs:
       - run: ajv validate -s schemas/extensions.schema.json -d extensions.registry.json
       - run: ajv validate -s schemas/plugins.schema.json -d plugins.registry.json
       - run: ajv validate -s schemas/plugins.schema.json -d tests/theme-plugin.registry.json
+      - run: ajv validate -s schemas/plugins.schema.json -d tests/localized-plugin.registry.json
+      - run: |
+          if ajv validate -s schemas/plugins.schema.json -d tests/invalid-localization.registry.json; then
+            echo 'Invalid localization must be rejected'
+            exit 1
+          fi
       - run: |
           if ajv validate -s schemas/plugins.schema.json -d tests/invalid-theme-kind.registry.json; then
             echo 'A theme category without kind: theme must be rejected'

@@ -16,6 +16,19 @@
 
 Published plugins have no preview or stable channel. Describe experimental behavior in the plugin README. Keep `preview: false` as an internal compatibility field for older Lite releases.
 
+## Localized plugins
+
+Generate metadata from the exact release archive with `eidos-plugin registry`.
+The optional `localization` object contains `defaultLocale`, `messages`, and the
+source `name` and `description` references. Keep top-level names and descriptions
+readable in the default language for older clients. Use canonical BCP 47 locale
+tags and include every metadata reference in the default dictionary.
+
+Lite and the community site choose labels using their interface language.
+Format 3 README resources come from the checksum-verified release archive and
+are selected as whole documents. Legacy documentation is read at its release
+tag; edits to the default branch do not change published documentation.
+
 ## Submit a Theme
 
 1. Create a theme plugin with `kind: "theme"`, Plugin API `1.6.0`, and a light/dark `theme.stylesheet` in `plugin.json`. The package contains no executable code or permissions.
