@@ -4,15 +4,30 @@
     {
       "id": "eidos.recent-history",
       "name": "Recent History",
-      "description": "Automatically record file-open history.",
+      "description": "Automatically records file opening history",
       "category": "productivity",
       "repo": "eidos-space/eidos-recent-history-plugin",
-      "version": "1.0.1",
-      "tag": "v1.0.1",
-      "asset": "eidos.recent-history-1.0.1.eidos-plugin",
-      "sha256": "f46e33d84538b1d7683d4749dbade37f42fe2fad72cd69638eeccc677d352313",
+      "version": "1.1.0",
+      "tag": "v1.1.0",
+      "asset": "eidos.recent-history-1.1.0.eidos-plugin",
+      "sha256": "2492545a6a681e30e9a174746475a82ab08c50ec5e167558daea70f22a6687cb",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.28.0 or later with Plugin API 3.6.0. Authorize automatic background startup and file-open history in each Space. Not supported by CLI Serve, Android or iOS."
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported. Authorize automatic background startup and file-open metadata in each Space.",
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Recent History",
+            "plugin.description": "Automatically records file opening history"
+          },
+          "zh-CN": {
+            "plugin.name": "最近打开",
+            "plugin.description": "自动记录文件的打开历史"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.markdown-title-sync",
@@ -20,12 +35,27 @@
       "description": "Keep Markdown filenames and existing leading H1 headings in sync when saving or renaming files.",
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-markdown-title-sync",
-      "version": "0.1.0",
-      "tag": "v0.1.0",
-      "asset": "eidos.markdown-title-sync-0.1.0.eidos-plugin",
-      "sha256": "26a66057608bc3378eca4cc4166f93e4d710262447ef6eb4ee0ea8e6f22e06e1",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "asset": "eidos.markdown-title-sync-0.2.0.eidos-plugin",
+      "sha256": "e3c1504db29193b1f8fcae43adf402a44f5ce0748b42176d7d58042787328c1b",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.23.0 or later with Plugin API 3.3.0. Optional per-Space file hooks for local Markdown saves and renames. Not supported by CLI Serve. Android and iOS device flows are unverified."
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Markdown Title Sync",
+            "plugin.description": "Keep Markdown filenames and existing leading H1 headings in sync when saving or renaming files."
+          },
+          "zh-CN": {
+            "plugin.name": "Markdown 标题同步",
+            "plugin.description": "保存或重命名 Markdown 文件时，同步文件名与已有的一级标题。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.gpx-viewer",
@@ -33,17 +63,44 @@
       "description": "Explore GPX tracks, routes and waypoints on an interactive map with timeline playback, elevation and speed charts.",
       "category": "data-visualization",
       "repo": "eidos-space/eidos-gpx-viewer",
-      "version": "0.1.4",
-      "tag": "v0.1.4",
-      "asset": "eidos.gpx-viewer-0.1.4.eidos-plugin",
-      "sha256": "4eb5e4e1a2c429f176f6b902529cb908db07ca6b079d79c564ee845b93271811",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "asset": "eidos.gpx-viewer-0.2.0.eidos-plugin",
+      "sha256": "7561ba49b5d07cb16db05b80e0c34a7b89be7e5f67a8f2ed3f36255b44fd3369",
       "preview": false,
-      "compatibility": "Requires Eidos Lite with Plugin API 3.0.0 or later, WebGL and browser workers. Read-only GPX file View; online basemap uses OpenFreeMap. Not supported by CLI Serve. Android and iOS are unverified.",
-      "icon": { "paths": ["M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z", "M9 3v15", "M15 6v15"] },
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported. Requires WebGL and browser workers; online basemap uses OpenFreeMap.",
+      "icon": {
+        "paths": [
+          "M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z",
+          "M9 3v15",
+          "M15 6v15"
+        ]
+      },
       "screenshots": [
-        { "path": "screenshots/overview.png", "alt": "GPX map and timeline showing a generated example route." },
-        { "path": "screenshots/details.png", "alt": "Synthetic GPX route details with elevation and speed charts." }
-      ]
+        {
+          "path": "screenshots/overview.png",
+          "alt": "GPX map and timeline showing a generated example route."
+        },
+        {
+          "path": "screenshots/details.png",
+          "alt": "Synthetic GPX route details with elevation and speed charts."
+        }
+      ],
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "GPX Viewer",
+            "plugin.description": "Explore GPX tracks, routes and waypoints on an interactive map with timeline playback, elevation and speed charts."
+          },
+          "zh-CN": {
+            "plugin.name": "GPX 查看器",
+            "plugin.description": "在交互式地图中浏览 GPX 轨迹、路线与航点，支持时间播放、海拔和速度图表。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.smart-actions",
@@ -51,13 +108,32 @@
       "description": "Use Jev to classify requests, assess urgency and score feedback, then write results to your table.",
       "category": "automation",
       "repo": "eidos-space/eidos-smart-actions-plugin",
-      "version": "0.3.0",
-      "tag": "v0.3.0",
-      "asset": "eidos.smart-actions-0.3.0.eidos-plugin",
-      "sha256": "b93c25d7867e7815c46b239d59bbd648600bcf4a3acf36fd2ba1a629652e813e",
+      "version": "0.4.0",
+      "tag": "v0.4.0",
+      "asset": "eidos.smart-actions-0.4.0.eidos-plugin",
+      "sha256": "27aa114325dec4e3a9b2a09a6eea04903f0235b9d894967d0ca5fcdfb2adcc97",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Not supported by CLI Serve.",
-      "icon": { "paths": ["M12 3v4m0 10v4M3 12h4m10 0h4M6 6l3 3m6 6 3 3M6 18l3-3m6-6 3-3"] }
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
+      "icon": {
+        "paths": [
+          "M12 3v4m0 10v4M3 12h4m10 0h4M6 6l3 3m6 6 3 3M6 18l3-3m6-6 3-3"
+        ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Smart Actions",
+            "plugin.description": "Use Jev to classify requests, assess urgency and score feedback, then write results to your table."
+          },
+          "zh-CN": {
+            "plugin.name": "智能操作",
+            "plugin.description": "使用 Jev 对请求分类、评估紧急程度和反馈分数，并将结果写入表格。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.map",
@@ -71,7 +147,13 @@
       "sha256": "f4150009b502003ba00ae8c123fbcba518ad31d6184205b58bd0f3fdbff410fb",
       "preview": false,
       "compatibility": "Requires Eidos Lite 0.20.0 or Eidos CLI 3.0.0 or later with Plugin API 3.0.0.",
-      "icon": { "paths": ["M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z", "M9 3v15", "M15 6v15"] }
+      "icon": {
+        "paths": [
+          "M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z",
+          "M9 3v15",
+          "M15 6v15"
+        ]
+      }
     },
     {
       "id": "eidos.markmap",
@@ -79,13 +161,32 @@
       "description": "Visualize Markdown documents as interactive mindmaps.",
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-markmap-plugin",
-      "version": "0.3.0",
-      "tag": "v0.3.0",
-      "asset": "eidos.markmap-0.3.0.eidos-plugin",
-      "sha256": "3b511bdc83042177fa3be77260fad00165aa5a11dcbf6ebf44c6e4b18f403b65",
+      "version": "0.4.0",
+      "tag": "v0.4.0",
+      "asset": "eidos.markmap-0.4.0.eidos-plugin",
+      "sha256": "e18d3948a85d5add1322d974f2d0637b46161b0ae8cebdc2b67e275ea8347de0",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Not supported by CLI Serve.",
-      "icon": { "paths": ["M12 3a3 3 0 0 0-3 3c0 .3.05.59.14.86l-4.29 2.5a3 3 0 0 0-1.85-.36 3 3 0 1 0 3 3c0-.3-.05-.59-.14-.86l4.29-2.5a3 3 0 0 0 1.85.36 3 3 0 0 0 1.85-.36l4.29 2.5c-.09.27-.14.56-.14.86a3 3 0 1 0 3-3 3 3 0 0 0-1.85.36l-4.29-2.5c.09-.27.14-.56.14-.86a3 3 0 0 0-3-3z"] }
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
+      "icon": {
+        "paths": [
+          "M12 3a3 3 0 0 0-3 3c0 .3.05.59.14.86l-4.29 2.5a3 3 0 0 0-1.85-.36 3 3 0 1 0 3 3c0-.3-.05-.59-.14-.86l4.29-2.5a3 3 0 0 0 1.85.36 3 3 0 0 0 1.85-.36l4.29 2.5c-.09.27-.14.56-.14.86a3 3 0 1 0 3-3 3 3 0 0 0-1.85.36l-4.29-2.5c.09-.27.14-.56.14-.86a3 3 0 0 0-3-3z"
+        ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Markmap",
+            "plugin.description": "Visualize Markdown documents as interactive mindmaps."
+          },
+          "zh-CN": {
+            "plugin.name": "思维导图",
+            "plugin.description": "将 Markdown 文档呈现为交互式思维导图。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.chart",
@@ -99,7 +200,14 @@
       "sha256": "82b7636544ada16f8b81fc4fd53d01c38bc158ed57a8237c574a9239e1c478d7",
       "preview": false,
       "compatibility": "Requires Eidos Lite 0.20.0 or Eidos CLI 3.0.0 or later with Plugin API 3.0.0. Native PNG export and embedded Dashboard presentation require Lite 0.22.1.",
-      "icon": { "paths": ["M3 3v18h18", "M7 16v-5", "M12 16V7", "M17 16v-8"] }
+      "icon": {
+        "paths": [
+          "M3 3v18h18",
+          "M7 16v-5",
+          "M12 16V7",
+          "M17 16v-8"
+        ]
+      }
     },
     {
       "id": "eidos.dashboard",
@@ -107,13 +215,35 @@
       "description": "Arrange saved views and ordinary files into dashboards with draggable, resizable panels.",
       "category": "data-visualization",
       "repo": "eidos-space/eidos-dashboard-plugin",
-      "version": "0.1.0",
-      "tag": "v0.1.0",
-      "asset": "eidos.dashboard-0.1.0.eidos-plugin",
-      "sha256": "b01bd0451bd8a4094cd92a1713e839f3c0c380bf1ce3f435fc6cf602ac55ae0a",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "asset": "eidos.dashboard-0.2.0.eidos-plugin",
+      "sha256": "840c90c35f62038c4b5ea3622f1db360ee0da30f840d54d1bc1d05c37fdc4c9e",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.22.1 with Plugin API 3.2.0. Reads workspace files and edits .dashboard configuration files. Not supported by CLI Serve, Android or iOS.",
-      "icon": { "paths": ["M3 3h7v7H3z", "M14 3h7v11h-7z", "M3 14h7v7H3z", "M14 18h7v3h-7z"] }
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
+      "icon": {
+        "paths": [
+          "M3 3h7v7H3z",
+          "M14 3h7v11h-7z",
+          "M3 14h7v7H3z",
+          "M14 18h7v3h-7z"
+        ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Dashboard",
+            "plugin.description": "Arrange saved views and ordinary files into dashboards with draggable, resizable panels."
+          },
+          "zh-CN": {
+            "plugin.name": "仪表盘",
+            "plugin.description": "将保存的视图和普通文件排列为可拖动、调整大小的仪表盘面板。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     },
     {
       "id": "eidos.journals",
@@ -121,12 +251,12 @@
       "description": "Open or create today's Markdown journal with a yearly writing heatmap, streaks, and recent entries overview.",
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-journals-plugin",
-      "version": "0.5.3",
-      "tag": "v0.5.3",
-      "asset": "eidos.journals-0.5.3.eidos-plugin",
-      "sha256": "d3528fe5046e041910f7178a17aa1b629db5adb74d78fff3e898654c8583d528",
+      "version": "0.6.0",
+      "tag": "v0.6.0",
+      "asset": "eidos.journals-0.6.0.eidos-plugin",
+      "sha256": "d00154a20fdad4eb758d37c599580cdc60a92d902b244e223d6b9326ce448de6",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Android requires a build with plugin Page navigation support. Not supported by CLI Serve.",
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
       "icon": {
         "paths": [
           "M8 2v4",
@@ -135,6 +265,21 @@
           "M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z",
           "m9 16 2 2 4-4"
         ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Journals",
+            "plugin.description": "Open or create today's Markdown journal with a yearly writing heatmap, streaks, and recent entries overview."
+          },
+          "zh-CN": {
+            "plugin.name": "日记",
+            "plugin.description": "打开或创建今天的 Markdown 日记，查看年度写作热力图、连续记录和最近日记。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
       }
     },
     {
@@ -144,17 +289,32 @@
       "description": "A standalone warm paper light palette and deep forest dark palette for Eidos Lite.",
       "category": "themes",
       "repo": "eidos-space/eidos-forest-theme",
-      "version": "0.1.0",
-      "tag": "v0.1.0",
-      "asset": "eidos.forest-theme-0.1.0.eidos-plugin",
-      "sha256": "876dcde93a575321768a4c7853b48ce0c288826dc6167116916597f9f4c5c648",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "asset": "eidos.forest-theme-0.2.0.eidos-plugin",
+      "sha256": "458589ec0f59f26f3728347b2e783bb48fc248e0c71e4bd11895b4521a4775e5",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.18.0 or later with Plugin API 1.6.0. Not supported by CLI Serve.",
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
       "icon": {
         "paths": [
           "M20 4C10 4 4 10 4 20c10 0 16-6 16-16Z",
           "M4 20c3-5 7-8 13-11"
         ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Forest",
+            "plugin.description": "A standalone warm paper light palette and deep forest dark palette for Eidos Lite."
+          },
+          "zh-CN": {
+            "plugin.name": "森林",
+            "plugin.description": "为 Eidos Lite 提供暖纸浅色和深森林暗色界面的独立主题。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
       }
     },
     {
@@ -164,16 +324,31 @@
       "description": "A standalone theme with bundled Maple Mono fonts and warm maple light and dark palettes.",
       "category": "themes",
       "repo": "eidos-space/eidos-maple-theme",
-      "version": "0.1.0",
-      "tag": "v0.1.0",
-      "asset": "eidos.maple-theme-0.1.0.eidos-plugin",
-      "sha256": "7a273964aa9f7876a15001cc52056d203d9a7ba1fbbd889b921218de8b4514e6",
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "asset": "eidos.maple-theme-0.2.0.eidos-plugin",
+      "sha256": "d301cfafb4b4c1c462c5d792dbe8d8ab136a418f2a99daf9a4cf39d79ac62ae5",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.18.0 or later with Plugin API 1.6.0. Not supported by CLI Serve.",
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
       "icon": {
         "paths": [
           "M12 2 9 7 6 5 7 10 3 9 5 13 2 15 9 16 8 21 12 18 16 21 15 16 22 15 19 13 21 9 17 10 18 5 15 7Z"
         ]
+      },
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Maple Mono",
+            "plugin.description": "A standalone theme with bundled Maple Mono fonts and warm maple light and dark palettes."
+          },
+          "zh-CN": {
+            "plugin.name": "Maple Mono",
+            "plugin.description": "内置 Maple Mono 字体，提供暖枫浅色与暗色界面的独立主题。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
       }
     }
   ]

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "plugins": [{
+    "id": "example.localized", "name": "History", "description": "File opening history",
+    "category": "productivity", "repo": "eidos-space/example-localized", "version": "1.0.0", "tag": "v1.0.0",
+    "asset": "example.localized-1.0.0.eidos-plugin", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "preview": false,
+    "compatibility": "Plugin API 3.7.0",
+    "localization": { "defaultLocale": "en", "name": "%plugin.name%", "description": "%plugin.description%", "messages": {
+      "en": { "plugin.name": "History", "plugin.description": "File opening history" },
+      "zh-CN": { "plugin.name": "最近打开", "plugin.description": "自动记录文件的打开历史" }
+    } }
+  }]
+}
