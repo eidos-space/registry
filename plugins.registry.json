@@ -251,12 +251,12 @@
       "description": "Open or create today's Markdown journal with a yearly writing heatmap, streaks, and recent entries overview.",
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-journals-plugin",
-      "version": "0.6.0",
-      "tag": "v0.6.0",
-      "asset": "eidos.journals-0.6.0.eidos-plugin",
-      "sha256": "d00154a20fdad4eb758d37c599580cdc60a92d902b244e223d6b9326ce448de6",
+      "version": "0.5.3",
+      "tag": "v0.5.3",
+      "asset": "eidos.journals-0.5.3.eidos-plugin",
+      "sha256": "d3528fe5046e041910f7178a17aa1b629db5adb74d78fff3e898654c8583d528",
       "preview": false,
-      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0. CLI Serve, Android and iOS are unsupported.",
+      "compatibility": "Requires Eidos Lite 0.20.0 or later with Plugin API 3.0.0. Android requires a build with plugin Page navigation support. Not supported by CLI Serve.",
       "icon": {
         "paths": [
           "M8 2v4",
@@ -265,21 +265,6 @@
           "M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z",
           "m9 16 2 2 4-4"
         ]
-      },
-      "localization": {
-        "defaultLocale": "en",
-        "messages": {
-          "en": {
-            "plugin.name": "Journals",
-            "plugin.description": "Open or create today's Markdown journal with a yearly writing heatmap, streaks, and recent entries overview."
-          },
-          "zh-CN": {
-            "plugin.name": "日记",
-            "plugin.description": "打开或创建今天的 Markdown 日记，查看年度写作热力图、连续记录和最近日记。"
-          }
-        },
-        "name": "%plugin.name%",
-        "description": "%plugin.description%"
       }
     },
     {
