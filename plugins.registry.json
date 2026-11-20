@@ -2,6 +2,34 @@
   "schemaVersion": 1,
   "plugins": [
     {
+      "id": "eidos.canvas",
+      "name": "Canvas",
+      "description": "Create and edit Obsidian JSON Canvas files in Eidos Lite.",
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Canvas",
+            "plugin.description": "Create and edit Obsidian JSON Canvas files in Eidos Lite."
+          },
+          "zh-CN": {
+            "plugin.name": "Canvas 画布",
+            "plugin.description": "在 Eidos Lite 中新建和编辑 Obsidian 的 JSON Canvas 文件。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      },
+      "category": "knowledge-and-writing",
+      "repo": "eidos-space/eidos-canvas",
+      "version": "0.5.6",
+      "tag": "v0.5.6",
+      "asset": "eidos.canvas-0.5.6.eidos-plugin",
+      "sha256": "5f49030511f0bf9f7933d219976a83201364060547657904921ebfae7aad6a50",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite desktop with Plugin API 3.7.0 or later. Tested on Eidos Lite 0.36.0."
+    },
+    {
       "id": "eidos.recent-history",
       "name": "Recent History",
       "description": "Automatically records file opening history",
