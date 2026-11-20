@@ -22,12 +22,12 @@
       },
       "category": "knowledge-and-writing",
       "repo": "eidos-space/eidos-canvas",
-      "version": "0.5.6",
-      "tag": "v0.5.6",
-      "asset": "eidos.canvas-0.5.6.eidos-plugin",
-      "sha256": "5f49030511f0bf9f7933d219976a83201364060547657904921ebfae7aad6a50",
+      "version": "0.5.7",
+      "tag": "v0.5.7",
+      "asset": "eidos.canvas-0.5.7.eidos-plugin",
+      "sha256": "18eccc992758156c3be6a1efb85d2c1b6e1556087432e13871a3320a149462c2",
       "preview": false,
-      "compatibility": "Requires Eidos Lite desktop with Plugin API 3.7.0 or later. Tested on Eidos Lite 0.36.0."
+      "compatibility": "Requires Eidos Lite desktop with Plugin API 3.7.0 or later. Opening Markdown cards in the right sidebar requires Eidos Lite 0.38.0 or later."
     },
     {
       "id": "eidos.recent-history",
