@@ -363,6 +363,52 @@
         "name": "%plugin.name%",
         "description": "%plugin.description%"
       }
+    },
+    {
+      "kind": "theme",
+      "id": "eidos.flexoki-theme",
+      "name": "Flexoki",
+      "description": "Warm paper and deep ink palettes with a soft teal accent for Eidos Lite.",
+      "category": "themes",
+      "repo": "mayneyao/eidos-theme-flexoki",
+      "version": "1.0.0",
+      "tag": "v1.0.0",
+      "asset": "eidos.flexoki-theme-1.0.0.eidos-plugin",
+      "sha256": "a9cc9311fcf500828266eff356894a3afe0f55b2fe7a0b6993d1a90f908ec714",
+      "preview": false,
+      "compatibility": "Requires Eidos Lite 0.29.0 or later with Plugin API 3.7.0.",
+      "icon": {
+        "paths": [
+          "m14 5 5 5-3 8-12 2 2-12 8-3Z",
+          "m14 5 3-3 5 5-3 3M4 20l7-7",
+          "M13 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+        ]
+      },
+      "screenshots": [
+        {
+          "path": "screenshots/light.png",
+          "alt": "Flexoki in light mode with a warm paper editor and a teal link"
+        },
+        {
+          "path": "screenshots/dark.png",
+          "alt": "Flexoki in dark mode with an ink-black editor and a teal link"
+        }
+      ],
+      "localization": {
+        "defaultLocale": "en",
+        "messages": {
+          "en": {
+            "plugin.name": "Flexoki",
+            "plugin.description": "Warm paper and deep ink palettes with a soft teal accent for Eidos Lite."
+          },
+          "zh-CN": {
+            "plugin.name": "Flexoki",
+            "plugin.description": "为 Eidos Lite 提供暖纸浅色和深墨暗色主题，以柔和的青色点缀。"
+          }
+        },
+        "name": "%plugin.name%",
+        "description": "%plugin.description%"
+      }
     }
   ]
 }
