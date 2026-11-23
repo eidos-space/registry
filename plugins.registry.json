@@ -219,13 +219,13 @@
     {
       "id": "eidos.chart",
       "name": "Chart",
-      "description": "Visualize table records with column, bar, line, and donut charts.",
+      "description": "Visualize table records with charts, summary metrics, and Calendar Heatmap.",
       "category": "data-visualization",
       "repo": "eidos-space/eidos-chart-plugin",
-      "version": "0.3.2",
-      "tag": "v0.3.2",
-      "asset": "eidos.chart-0.3.2.eidos-plugin",
-      "sha256": "82b7636544ada16f8b81fc4fd53d01c38bc158ed57a8237c574a9239e1c478d7",
+      "version": "0.4.0",
+      "tag": "v0.4.0",
+      "asset": "eidos.chart-0.4.0.eidos-plugin",
+      "sha256": "a3fdc08a9a92edc305edc3409992415e6e499f2cb77d841f0588b81bd4207519",
       "preview": false,
       "compatibility": "Requires Eidos Lite 0.20.0 or Eidos CLI 3.0.0 or later with Plugin API 3.0.0. Native PNG export and embedded Dashboard presentation require Lite 0.22.1.",
       "icon": {
